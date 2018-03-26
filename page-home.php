@@ -23,25 +23,25 @@ $reason_2_desc        = get_field('reason_2_description');
 
 $who_feature_image = get_field('who_feature_image');
 $who_section_title = get_field('who_section_title');
-$who_section_body = get_field('who_section_body');
+$who_section_body  = get_field('who_section_body');
 
 $features_section_image = get_field('features_section_image');
 $features_section_title = get_field('features_section_title');
-$features_section_body = get_field('features_section_body');
+$features_section_body  = get_field('features_section_body');
 
 $project_feature_title = get_field('project_feature_title');
-$project_feature_body = get_field('project_feature_body');
+$project_feature_body  = get_field('project_feature_body');
 
 $instructor_section_title = get_field('instructor_section_title');
-$instructor_name = get_field('instructor_name');
-$bio_excerpt = get_field('bio_excerpt');
-$full_bio = get_field('full_bio');
-$twitter_username = get_field('twitter_username');
-$facebook_username = get_field('facebook_username');
-$google_plus_username = get_field('google_plus_username');
-$num_students = get_field('number_students');
-$num_reviews = get_field('number_reviews');
-$num_courses = get_field('number_courses');
+$instructor_name          = get_field('instructor_name');
+$bio_excerpt              = get_field('bio_excerpt');
+$full_bio                 = get_field('full_bio');
+$twitter_username         = get_field('twitter_username');
+$facebook_username        = get_field('facebook_username');
+$google_plus_username     = get_field('google_plus_username');
+$num_students             = get_field('number_students');
+$num_reviews              = get_field('number_reviews');
+$num_courses              = get_field('number_courses');
 
 get_header(); ?>
 
@@ -325,50 +325,32 @@ get_header(); ?>
         <div class="col-sm-8 col-sm-offset-2">
           <h2>What People Are Saying About Romantic</h2>
 
-          <div class="row testimonial">
-            <div class="col-sm-4"><img src="<?php bloginfo('stylesheet_directory'); ?>/assets/img/aj.png" alt=""></div>
+          <!-- get value from db -->
+          <?php $loop = new WP_Query( array(
+            'post_type' => 'testmonial',
+            'orderby' => 'post_id',
+            'order' => 'ASC'
+          )); ?>
 
-            <div class="col-sm-8">
-              <blockquote>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente dolor enim quia mollitia corrupti? Unde vel, fugit illo cum, sint rem ut quis, doloremque voluptas in voluptates animi eaque vero?</blockquote>
-              <cite>&mdash; Brennanm graduate of all courses</cite>
+          <!-- loop creat icon and title -->
+          <?php while($loop->have_posts()) : $loop->the_post(); ?>
+
+            <div class="row testimonial">
+              <div class="col-sm-4">
+                <?php 
+                  if (has_post_thumbnail()) {
+                    the_post_thumbnail( 200, 200); // width, heigth
+                  }
+                ?>
+              </div>
+
+              <div class="col-sm-8">
+                <blockquote><?php the_content(); ?></blockquote>
+                <cite>&mdash; <?php the_title(); ?></cite>
+              </div>
             </div>
-          </div>
 
-          <div class="row testimonial">
-            <div class="col-sm-4"><img src="<?php bloginfo('stylesheet_directory'); ?>/assets/img/ben.png" alt=""></div>
-
-            <div class="col-sm-8">
-              <blockquote>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente dolor enim quia mollitia corrupti? Unde vel, fugit illo cum, sint rem ut quis, doloremque voluptas in voluptates animi eaque vero?</blockquote>
-              <cite>&mdash; Brennanm graduate of all courses</cite>
-            </div>
-          </div>
-
-          <div class="row testimonial">
-            <div class="col-sm-4"><img src="<?php bloginfo('stylesheet_directory'); ?>/assets/img/ernest.png" alt=""></div>
-
-            <div class="col-sm-8">
-              <blockquote>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente dolor enim quia mollitia corrupti? Unde vel, fugit illo cum, sint rem ut quis, doloremque voluptas in voluptates animi eaque vero?</blockquote>
-              <cite>&mdash; Brennanm graduate of all courses</cite>
-            </div>
-          </div>
-
-          <div class="row testimonial">
-            <div class="col-sm-4"><img src="<?php bloginfo('stylesheet_directory'); ?>/assets/img/aj.png" alt=""></div>
-
-            <div class="col-sm-8">
-              <blockquote>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente dolor enim quia mollitia corrupti? Unde vel, fugit illo cum, sint rem ut quis, doloremque voluptas in voluptates animi eaque vero?</blockquote>
-              <cite>&mdash; Brennanm graduate of all courses</cite>
-            </div>
-          </div>
-
-          <div class="row testimonial">
-            <div class="col-sm-4"><img src="<?php bloginfo('stylesheet_directory'); ?>/assets/img/ben.png" alt=""></div>
-
-            <div class="col-sm-8">
-              <blockquote>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente dolor enim quia mollitia corrupti? Unde vel, fugit illo cum, sint rem ut quis, doloremque voluptas in voluptates animi eaque vero?</blockquote>
-              <cite>&mdash; Brennanm graduate of all courses</cite>
-            </div>
-          </div>
+          <?php endwhile; ?>
 
         </div>
       </div>
