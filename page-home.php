@@ -25,6 +25,14 @@ $who_feature_image = get_field('who_feature_image');
 $who_section_title = get_field('who_section_title');
 $who_section_body = get_field('who_section_body');
 
+$features_section_image = get_field('features_section_image');
+$features_section_title = get_field('features_section_title');
+$features_section_body = get_field('features_section_body');
+
+$project_feature_title = get_field('project_feature_title');
+$project_feature_body = get_field('project_feature_body');
+
+
 get_header(); ?>
 
   <!-- HERO -->
@@ -144,40 +152,38 @@ get_header(); ?>
     <div class="container">
 
       <div class="section-header">
-        <img src="<?php bloginfo('stylesheet_directory'); ?>/assets/img/icon-rocket.png" alt="Rocket">
-        <h2>Course Features</h2>
+
+        <!-- If user uploaded an image -->
+        <?php if(!empty($features_section_image)) : ?>
+          <img src="<?php echo $features_section_image['url']; ?>" alt="<?php echo $features_section_image['alt']; ?>">  
+        <?php endif; ?>
+
+        <h2><?php echo $features_section_title; ?></h2>
+
+        <!-- If user added body text -->
+        <?php if(!empty($features_section_body)) : ?>
+          <p class="lead"><?php echo $features_section_body; ?></p>
+        <?php endif; ?>
+
       </div>
 
       <div class="row">
-        <div class="col-sm-2">
-          <i class="ci ci-watch"></i>
-          <h4>Lifetime access to 80+ lectures</h4>
-        </div>
 
-        <div class="col-sm-2">
-          <i class="ci ci-calendar"></i>
-          <h4>Lifetime access to 80+ lectures</h4>
-        </div>
+        <!-- get value from db -->
+        <?php $loop = new WP_Query( array(
+          'post_type' => 'course_feature',
+          'orderby' => 'post_id',
+          'order' => 'ASC'
+        )); ?>
 
-        <div class="col-sm-2">
-          <i class="ci ci-community"></i>
-          <h4>Lifetime access to 80+ lectures</h4>
-        </div>
+        <!-- loop creat icon and title -->
+        <?php while($loop->have_posts()) : $loop->the_post(); ?>
+          <div class="col-sm-2">
+            <i class="<?php the_field('course_feature_icon'); ?>"></i>
+            <h4><?php the_title(); ?></h4>
+          </div>
+        <?php endwhile; ?>
 
-        <div class="col-sm-2">
-          <i class="ci ci-instructor"></i>
-          <h4>Lifetime access to 80+ lectures</h4>
-        </div>
-
-        <div class="col-sm-2">
-          <i class="ci ci-computer"></i>
-          <h4>Lifetime access to 80+ lectures</h4>
-        </div>
-
-        <div class="col-sm-2">
-          <i class="ci ci-device"></i>
-          <h4>Lifetime access to 80+ lectures</h4>
-        </div>
       </div>
     </div>
   </section>
@@ -186,25 +192,32 @@ get_header(); ?>
   <section id="project-features">
     <div class="container">
 
-      <h2>Final Project Features</h2>
-      <div class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit consequuntur eum quia voluptatum dolorum nemo voluptates, laboriosam debitis minus magni, nulla, repudiandae minima! Delectus, eligendi. Ea saepe veniam sit reiciendis.</div>
+      <h2><?php echo $project_feature_title; ?></h2>
+      <div class="lead"><?php echo $project_feature_body; ?></div>
 
       <div class="row">
-        <div class="col-sm-4">
-          <img src="<?php bloginfo('stylesheet_directory'); ?>/assets/img/icon-design.png" alt="Design">
-          <h3>Sexy &amp; Modren Design</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum corporis veniam quas perspiciatis ipsum alias vitae quis enim. Nisi consequuntur vero officia aut dolor laboriosam. Accusantium voluptate possimus deleniti consequuntur!</p>
-        </div>
-        <div class="col-sm-4">
-          <img src="<?php bloginfo('stylesheet_directory'); ?>/assets/img/icon-code.png" alt="Code">
-          <h3>Quality HTML5 &amp; CSS3</h3>
-          <p>Id natus ipsum excepturi sequi eligendi officiis eaque modi, et rem quasi repudiandae blanditiis doloribus ipsam vel? Adipisci voluptatem quis sunt inventore rem laborum nostrum, tempore incidunt delectus id illum.</p>
-        </div>
-        <div class="col-sm-4">
-          <img src="<?php bloginfo('stylesheet_directory'); ?>/assets/img/icon-cms.png" alt="">
-          <h3>Easy-to-use CMS</h3>
-          <p>Adipisci iure culpa quis architecto quidem placeat sequi, incidunt exercitationem repellendus, itaque sit quos eaque odio nisi harum, consequuntur magni deserunt cupiditate nostrum labore praesentium. Ratione laudantium facilis consequuntur nostrum?</p>
-        </div>
+
+        <!-- get value from db -->
+        <?php $loop = new WP_Query( array(
+          'post_type' => 'project_feature',
+          'orderby' => 'post_id',
+          'order' => 'ASC'
+        )); ?>
+
+        <!-- loop creat icon and title -->
+        <?php while($loop->have_posts()) : $loop->the_post(); ?>
+          <div class="col-sm-4">
+            <?php
+            // loop add image 
+            if( has_post_thumbnail()) {
+              the_post_thumbnail();
+            }
+            ?>
+            <h3><?php echo the_title(); ?></h3>
+            <p><?php echo the_content(); ?></p>
+          </div>
+        <?php endwhile; ?>
+
       </div>
     </div>
   </section>
