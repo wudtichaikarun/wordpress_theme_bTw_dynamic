@@ -31,7 +31,7 @@
           <h3><?php echo the_title(); ?></h3>
           <p><?php echo the_content(); ?></p>
         </div>
-      <?php endwhile; ?>
+      <?php endwhile; wp_reset_query() ?>
 
     </div>
   </div>

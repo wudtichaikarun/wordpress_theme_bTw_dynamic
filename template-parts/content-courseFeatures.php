@@ -39,7 +39,7 @@
           <i class="<?php the_field('course_feature_icon'); ?>"></i>
           <h4><?php the_title(); ?></h4>
         </div>
-      <?php endwhile; ?>
+      <?php endwhile; wp_reset_query() ?>
 
     </div>
   </div>
