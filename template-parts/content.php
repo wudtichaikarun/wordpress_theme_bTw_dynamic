@@ -46,9 +46,4 @@
 		<?php the_excerpt(); ?>
 	</div>
 
-	<?php // bootstrapwordpress_post_thumbnail(); ?>
-
-	<footer class="entry-footer">
-		<?php //bootstrapwordpress_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->

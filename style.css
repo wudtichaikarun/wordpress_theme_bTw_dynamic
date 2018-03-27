@@ -412,6 +412,12 @@ h1 {
   font-size: 3em;
 }
 
+
+.archive-description {
+  font-size: 2rem;
+  color: var(--color-white);
+}
+
 h1,h2 {
   margin: 0 0 4rem;
 }
@@ -902,6 +908,20 @@ footer li.signup-link a:hover {
   border-top: 1px solid var(--color-gray-light); 
 }
 
+/* specific wordpress comment style */
+#comments footer {
+  background: none;
+  color: inherit;
+}
+
+#comments footer a {
+  color: inherit;
+}
+
+#comments .comment-metadata {
+  margin: 1rem 0 0;
+}
+
 /* ----- RESOURCE ----- */
 .resource {
   width: 31.33333333%;
@@ -948,6 +968,10 @@ textarea {
   box-sizing: border-box;
   width: 100%;
   padding: .5rem;
+}
+
+.search-form > .search-submit {
+  display: none;
 }
 
 input[type="submit"],
