@@ -63,6 +63,11 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 /*--------------------------------------------------------------
 ## Menus
 --------------------------------------------------------------*/
+.navbar-nav > li.current-menu-item a {
+  color: var(--color-white);
+  background-color: var(--color-gray-dark);
+}
+
 /* Small menu. */
 .menu-toggle,
 .main-navigation.toggled ul {
